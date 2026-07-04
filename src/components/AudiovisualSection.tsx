@@ -44,10 +44,10 @@ export function AudiovisualSection() {
   const items = tab === "photos" ? photos : videos;
 
   return (
-    <section id="audiovisual" className="section">
+    <section id="media" className="section">
       <div className="container">
         <p className="section-label">Portfolio</p>
-        <h2 className="section-title">Audiovisual</h2>
+        <h2 className="section-title">Photo & Video</h2>
 
         <div className={styles.tabs} role="tablist" aria-label="Media type">
           <button

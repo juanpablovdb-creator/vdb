@@ -4,29 +4,29 @@ import styles from "./ContactSection.module.css";
 export function ContactSection() {
   return (
     <section id="contact" className={styles.contact}>
-      <div className="container">
-        <div className={styles.inner}>
+      <div className={styles.inner}>
+        <div className="container">
           <h2 className={styles.title}>Let's work together</h2>
 
           <div className={styles.availability}>
             {contact.availability.map((item) => (
               <span key={item} className={styles.badge}>
-                Available for {item}
+                {item}
               </span>
             ))}
           </div>
 
           <div className={styles.actions}>
-            <a href={`mailto:${contact.email}`} className={styles.primaryBtn}>
+            <a href={`mailto:${contact.email}`} className={styles.emailLink}>
               {contact.email}
             </a>
             <a
               href={contact.calendar}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.secondaryBtn}
+              className={styles.calendarLink}
             >
-              Book a call →
+              Book a call
             </a>
           </div>
 
@@ -44,11 +44,13 @@ export function ContactSection() {
             ))}
           </nav>
         </div>
-
-        <footer className={styles.footer}>
-          © {new Date().getFullYear()} Juan Pablo · Built with vibe
-        </footer>
       </div>
+
+      <footer className={styles.footer}>
+        <div className="container">
+          © {new Date().getFullYear()} Juan Pablo
+        </div>
+      </footer>
     </section>
   );
 }

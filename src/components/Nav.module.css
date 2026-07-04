@@ -5,10 +5,14 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   background: var(--nav-bg);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid transparent;
   transition:
-    background-color 0.35s ease,
-    border-color 0.35s ease;
+    background-color 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+}
+
+.navScrolled {
+  border-bottom-color: var(--border);
 }
 
 .navInner {
@@ -20,8 +24,11 @@
 }
 
 .logo {
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: var(--font-display);
   font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   color: var(--text);
   text-decoration: none;
   white-space: nowrap;
@@ -29,7 +36,7 @@
 }
 
 .logo:hover {
-  color: var(--accent);
+  color: var(--text-muted);
 }
 
 .links {
@@ -47,25 +54,28 @@
 }
 
 .link {
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--text-muted);
   text-decoration: none;
   padding: 0.35rem 0.65rem;
   border-radius: 6px;
   white-space: nowrap;
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
+    color 0.2s var(--ease),
+    background-color 0.2s var(--ease);
 }
 
 .link:hover {
   color: var(--text);
-  background: var(--accent-subtle);
+  background: var(--surface-hover);
 }
 
 .linkActive {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .actions {
@@ -77,7 +87,7 @@
 
 @media (max-width: 768px) {
   .link {
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
     padding: 0.3rem 0.5rem;
   }
 }

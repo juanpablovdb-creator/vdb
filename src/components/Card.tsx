@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { CardItem, CardSize } from "../data/content";
+import { MasterclassInquiryModal } from "./MasterclassInquiryModal";
 import styles from "./Card.module.css";
 
 interface CardProps {
@@ -112,17 +113,45 @@ interface SpeakingCardProps {
   venue: string;
   audience: string;
   topic: string;
+  inquiryForm?: boolean;
 }
 
-export function SpeakingCard({ title, venue, audience, topic }: SpeakingCardProps) {
+export function SpeakingCard({
+  title,
+  venue,
+  audience,
+  topic,
+  inquiryForm,
+}: SpeakingCardProps) {
+  const [formOpen, setFormOpen] = useState(false);
+
   return (
-    <article className={`${styles.card} ${styles["card--work"]}`}>
-      <div className={styles.cardBody}>
-        <span className={styles.cardTag}>{venue}</span>
-        <h3 className={styles.cardTitle}>{title}</h3>
-        <p className={styles.cardMeta}>{audience}</p>
-        <p className={styles.cardDescription}>{topic}</p>
-      </div>
-    </article>
+    <>
+      <article className={`${styles.card} ${styles["card--work"]}`}>
+        <div className={styles.cardBody}>
+          <span className={styles.cardTag}>{venue}</span>
+          <h3 className={styles.cardTitle}>{title}</h3>
+          <p className={styles.cardMeta}>{audience}</p>
+          <p className={styles.cardDescription}>{topic}</p>
+          {inquiryForm && (
+            <button
+              type="button"
+              className={styles.inquireBtn}
+              onClick={() => setFormOpen(true)}
+            >
+              Request a session
+            </button>
+          )}
+        </div>
+      </article>
+
+      {inquiryForm && (
+        <MasterclassInquiryModal
+          open={formOpen}
+          onClose={() => setFormOpen(false)}
+          sessionTitle={title}
+        />
+      )}
+    </>
   );
 }

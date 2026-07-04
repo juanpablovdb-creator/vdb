@@ -4,19 +4,20 @@
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
   color: var(--text-muted);
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
 }
 
 .toggle:hover {
-  color: var(--accent);
-  background: var(--accent-subtle);
+  color: var(--text);
+  border-color: var(--text-muted);
 }
 
 .icon {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1rem;
+  height: 1rem;
 }

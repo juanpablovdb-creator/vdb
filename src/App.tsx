@@ -4,7 +4,7 @@ import { Card, WorkCard, SpeakingCard } from "./components/Card";
 import { AudiovisualSection } from "./components/AudiovisualSection";
 import { ContactSection } from "./components/ContactSection";
 import {
-  proyectos,
+  projects,
   companies,
   previousWork,
   speaking,
@@ -18,12 +18,12 @@ export function App() {
       <main>
         <Hero />
 
-        <section id="proyectos" className="section">
+        <section id="projects" className="section">
           <div className="container">
             <p className="section-label">Engineering</p>
-            <h2 className="section-title">Proyectos de Ingeniería</h2>
+            <h2 className="section-title">Engineering Projects</h2>
             <div className="card-grid card-grid--projects">
-              {proyectos.map((item) => (
+              {projects.map((item) => (
                 <Card key={item.id} item={item} />
               ))}
             </div>
@@ -72,6 +72,7 @@ export function App() {
                   venue={item.venue}
                   audience={item.audience}
                   topic={item.topic}
+                  inquiryForm={item.inquiryForm}
                 />
               ))}
             </div>

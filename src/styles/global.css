@@ -1,30 +1,33 @@
 :root,
 [data-theme="light"] {
-  --bg: #f7f3ec;
-  --text: #2b2521;
-  --text-muted: #6b635c;
-  --surface: #efe9df;
-  --surface-hover: #e8e0d4;
-  --border: #ddd5c8;
-  --accent: #c1613f;
-  --accent-hover: #a85235;
-  --accent-subtle: rgba(193, 97, 63, 0.12);
-  --shadow: rgba(43, 37, 33, 0.08);
-  --nav-bg: rgba(247, 243, 236, 0.85);
+  --bg: #f7f7f7;
+  --text: #101010;
+  --text-muted: #908c8c;
+  --text-muted-light: #aaaaaa;
+  --surface: #ffffff;
+  --surface-hover: #efefef;
+  --border: #efefef;
+  --inverse-bg: #101010;
+  --inverse-text: #f7f7f7;
+  --shadow: rgba(16, 16, 16, 0.04);
+  --nav-bg: rgba(247, 247, 247, 0.92);
+  --ease: cubic-bezier(0.11, 0.82, 0.39, 0.92);
+  --font-display: "Sofia Sans Condensed", system-ui, sans-serif;
+  --font-mono: "Spline Sans Mono", ui-monospace, monospace;
 }
 
 [data-theme="dark"] {
-  --bg: #1c1815;
-  --text: #f0eae1;
-  --text-muted: #a89f94;
-  --surface: #2a2420;
-  --surface-hover: #342d28;
-  --border: #3d3530;
-  --accent: #d4734f;
-  --accent-hover: #e08862;
-  --accent-subtle: rgba(212, 115, 79, 0.15);
-  --shadow: rgba(0, 0, 0, 0.3);
-  --nav-bg: rgba(28, 24, 21, 0.88);
+  --bg: #101010;
+  --text: #f7f7f7;
+  --text-muted: #908c8c;
+  --text-muted-light: #606060;
+  --surface: #1a1a1a;
+  --surface-hover: #242424;
+  --border: #2a2a2a;
+  --inverse-bg: #000000;
+  --inverse-text: #f7f7f7;
+  --shadow: rgba(0, 0, 0, 0.35);
+  --nav-bg: rgba(16, 16, 16, 0.92);
 }
 
 *,
@@ -48,34 +51,31 @@ body,
 }
 
 body {
-  font-family: "DM Sans", system-ui, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
   color: var(--text);
   background-color: var(--bg);
   transition:
-    background-color 0.35s ease,
-    color 0.35s ease;
+    background-color 0.35s var(--ease),
+    color 0.35s var(--ease);
 }
 
 h1,
 h2,
 h3,
 .section-title {
-  font-family: "Instrument Serif", Georgia, serif;
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.99;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
 a {
-  color: var(--accent);
+  color: inherit;
   text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-a:hover {
-  color: var(--accent-hover);
 }
 
 img {
@@ -92,8 +92,8 @@ button {
 }
 
 ::selection {
-  background: var(--accent-subtle);
-  color: var(--text);
+  background: var(--text);
+  color: var(--bg);
 }
 
 .sr-only {
@@ -109,56 +109,63 @@ button {
 }
 
 .container {
-  width: min(1120px, calc(100% - 2.5rem));
+  width: min(1400px, calc(100% - 2rem));
   margin-inline: auto;
 }
 
 .section {
-  padding-block: 5rem;
+  padding-block: 6rem;
 }
 
 .section-label {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
 }
 
 .section-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  margin-bottom: 2.5rem;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 3rem;
+  color: var(--text);
 }
 
 .card-grid {
   display: grid;
-  gap: 1.25rem;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
 }
 
 .card-grid--projects {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .card-grid--companies {
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
 }
 
 .card-grid--compact {
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
 
 .card-grid--work {
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  max-width: 720px;
+  gap: 0;
+  background: transparent;
+  border: none;
+  max-width: 900px;
 }
 
 @media (max-width: 640px) {
   .section {
-    padding-block: 3.5rem;
+    padding-block: 4rem;
+  }
+
+  body {
+    font-size: 16px;
   }
 }

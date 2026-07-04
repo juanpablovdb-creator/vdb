@@ -1,117 +1,151 @@
 .contact {
-  padding-block: 5rem 6rem;
+  padding-block: 0 0;
 }
 
 .inner {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: clamp(2rem, 5vw, 3.5rem);
-  text-align: center;
-  transition:
-    background-color 0.35s ease,
-    border-color 0.35s ease;
+  background: var(--inverse-bg);
+  color: var(--inverse-text);
+  padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+  transition: background-color 0.35s var(--ease);
 }
 
 .title {
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  margin-bottom: 1rem;
-  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  color: var(--inverse-text);
+  max-width: 12ch;
 }
 
 .availability {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .badge {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.68rem;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 300;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.4rem 0.85rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
   color: var(--text-muted);
 }
 
 .actions {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
 }
 
-.primaryBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 500;
-  font-size: 0.95rem;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
+.emailLink {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  color: var(--inverse-text);
+  position: relative;
+  padding-bottom: 0.35rem;
 }
 
-.primaryBtn:hover {
-  background: var(--accent-hover);
-  color: #fff;
+.emailLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--text-muted-light);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
 }
 
-.secondaryBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-weight: 500;
-  font-size: 0.95rem;
-  border-radius: 8px;
-  text-decoration: none;
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
+.emailLink:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
 }
 
-.secondaryBtn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.calendarLink {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--inverse-text);
+  padding: 0 1.5rem;
+  position: relative;
+}
+
+.calendarLink::before,
+.calendarLink::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.4s var(--ease);
+}
+
+.calendarLink::before {
+  content: "[";
+  left: 0;
+}
+
+.calendarLink::after {
+  content: "]";
+  right: 0;
+}
+
+.calendarLink:hover::before {
+  left: -0.25rem;
+}
+
+.calendarLink:hover::after {
+  right: -0.25rem;
 }
 
 .social {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.25rem;
+  gap: 1.5rem 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .socialLink {
-  font-size: 0.88rem;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.3s var(--ease);
 }
 
 .socialLink:hover {
-  color: var(--accent);
+  color: var(--inverse-text);
 }
 
 .footer {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  padding: 2rem 0;
+  background: var(--inverse-bg);
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  color: var(--text-muted-light);
+}
+
+@media (max-width: 640px) {
+  .actions {
+    width: 100%;
+  }
 }

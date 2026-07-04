@@ -25,6 +25,7 @@ export interface SpeakingItem {
   venue: string;
   audience: string;
   topic: string;
+  inquiryForm?: boolean;
 }
 
 export interface StatItem {
@@ -51,16 +52,16 @@ export const hero = {
 };
 
 export const navLinks = [
-  { id: "proyectos", label: "Proyectos" },
+  { id: "projects", label: "Projects" },
   { id: "companies", label: "Companies" },
   { id: "previous-work", label: "Previous Work" },
   { id: "education", label: "Education" },
   { id: "consultancy", label: "Consultancy" },
-  { id: "audiovisual", label: "Audiovisual" },
+  { id: "media", label: "Media" },
   { id: "contact", label: "Contact" },
 ];
 
-export const proyectos: CardItem[] = [
+export const projects: CardItem[] = [
   {
     id: "stripboarder",
     title: "Stripboarder",
@@ -156,11 +157,12 @@ export const speaking: SpeakingItem[] = [
     audience: "Marketing & ops professionals",
     topic:
       "Practical AI workflows for non-engineers — prompt systems, automation stacks, and shipping without a dev team.",
+    inquiryForm: true,
   },
   {
     id: "uniandes",
     title: "Entrepreneur for Engineers",
-    venue: "Universidad de los Andes",
+    venue: "University of the Andes, Bogotá",
     audience: "Engineering students & faculty",
     topic:
       "Panelist on building startups from technical foundations — when to code, when to sell, and how to do both.",
@@ -232,7 +234,7 @@ export const videos: AudiovisualItem[] = [
 ];
 
 export const contact = {
-  availability: ["speaking", "consulting", "hiring"],
+  availability: ["Speaking", "Consulting", "Hiring"],
   email: "hello@juanpablo.dev",
   calendar: "https://cal.com/juanpablo",
   social: [
@@ -240,4 +242,8 @@ export const contact = {
     { label: "GitHub", url: "https://github.com/juanpablo" },
     { label: "Vloom", url: "https://vloom.co" },
   ],
+};
+
+export const masterclassInquiry = {
+  recipientEmail: contact.email,
 };
