@@ -1,44 +1,13 @@
-import { useState } from "react";
 import type { CardItem, CardSize } from "../data/content";
-import { MasterclassInquiryModal } from "./MasterclassInquiryModal";
+import { MasterclassApplication } from "./MasterclassApplication";
+import { CardBrandArt } from "./CardBrandArt";
+import { BrowserMockup } from "./BrowserMockup";
 import styles from "./Card.module.css";
+import { useState } from "react";
 
 interface CardProps {
   item: CardItem;
   size?: CardSize;
-}
-
-function CardMedia({ item }: { item: CardItem }) {
-  const [failed, setFailed] = useState(false);
-  const initial = item.title.charAt(0).toUpperCase();
-
-  if (!item.image || failed) {
-    return <div className={styles.placeholder}>{initial}</div>;
-  }
-
-  return (
-    <>
-      <img
-        className={`${styles.imageLayer} ${styles.imagePrimary}`}
-        src={item.image}
-        alt={item.imageAlt ?? item.title}
-        loading="lazy"
-        onError={() => setFailed(true)}
-      />
-      {item.image && (
-        <img
-          className={`${styles.imageLayer} ${styles.imageHover}`}
-          src={item.image.replace(".webp", "-hover.webp")}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = "none";
-          }}
-        />
-      )}
-    </>
-  );
 }
 
 export function Card({ item, size = "default" }: CardProps) {
@@ -52,6 +21,7 @@ export function Card({ item, size = "default" }: CardProps) {
           : "";
 
   const showMedia = size !== "work";
+  const brandSize = size === "work" ? "default" : size;
 
   return (
     <article className={`${styles.card} ${sizeClass}`}>
@@ -67,7 +37,30 @@ export function Card({ item, size = "default" }: CardProps) {
 
       {showMedia && (
         <div className={styles.cardMedia}>
-          <CardMedia item={item} />
+          {item.screenshot ? (
+            <BrowserMockup
+              src={item.screenshot}
+              alt={`${item.title} website`}
+              domain={item.domain}
+              fallback={
+                <CardBrandArt
+                  title={item.title}
+                  brand={item.brand}
+                  art={item.art}
+                  size={brandSize}
+                  showText={false}
+                />
+              }
+            />
+          ) : (
+            <CardBrandArt
+              title={item.title}
+              brand={item.brand}
+              art={item.art}
+              size={brandSize}
+              showText={false}
+            />
+          )}
         </div>
       )}
 
@@ -139,14 +132,14 @@ export function SpeakingCard({
               className={styles.inquireBtn}
               onClick={() => setFormOpen(true)}
             >
-              Request a session
+              Apply for course
             </button>
           )}
         </div>
       </article>
 
       {inquiryForm && (
-        <MasterclassInquiryModal
+        <MasterclassApplication
           open={formOpen}
           onClose={() => setFormOpen(false)}
           sessionTitle={title}

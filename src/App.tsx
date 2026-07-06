@@ -1,15 +1,10 @@
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
+import { GigMarquee } from "./components/Marquee";
 import { Card, WorkCard, SpeakingCard } from "./components/Card";
 import { AudiovisualSection } from "./components/AudiovisualSection";
 import { ContactSection } from "./components/ContactSection";
-import {
-  projects,
-  companies,
-  previousWork,
-  speaking,
-  consultancy,
-} from "./data/content";
+import { projects, companies, previousWork, speaking } from "./data/content";
 
 export function App() {
   return (
@@ -83,12 +78,8 @@ export function App() {
           <div className="container">
             <p className="section-label">Consulting</p>
             <h2 className="section-title">Consultancy & Side Gigs</h2>
-            <div className="card-grid card-grid--compact">
-              {consultancy.map((item) => (
-                <Card key={item.id} item={item} size="compact" />
-              ))}
-            </div>
           </div>
+          <GigMarquee />
         </section>
 
         <AudiovisualSection />

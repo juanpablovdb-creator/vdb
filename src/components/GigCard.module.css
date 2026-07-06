@@ -1,0 +1,61 @@
+.gig {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.5rem 0;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.logo,
+.logoFallback {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.logo {
+  object-fit: contain;
+}
+
+.logoFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--accent-muted);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1.15;
+  transition: color 0.2s var(--ease);
+}
+
+a.gig:hover .name {
+  color: var(--accent);
+}
+
+.arrow {
+  font-size: 0.9rem;
+  color: var(--text-muted-light);
+  transition:
+    color 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+a.gig:hover .arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}

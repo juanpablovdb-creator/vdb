@@ -25,9 +25,10 @@
 
 .logo {
   font-family: var(--font-display);
+  font-stretch: 125%;
   font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 850;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   color: var(--text);
   text-decoration: none;
@@ -54,11 +55,10 @@
 }
 
 .link {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0;
-  text-transform: none;
   color: var(--text-muted);
   text-decoration: none;
   padding: 0.35rem 0.65rem;
@@ -75,7 +75,8 @@
 }
 
 .linkActive {
-  color: var(--text);
+  color: var(--accent);
+  background: var(--accent-muted);
 }
 
 .actions {

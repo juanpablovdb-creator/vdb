@@ -1,0 +1,106 @@
+.brand {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, var(--brand-bg) 0%, var(--brand-bg-2) 100%);
+  color: var(--brand-text);
+  overflow: hidden;
+}
+
+.brand--large {
+  padding: 2rem;
+}
+
+.brand--compact {
+  padding: 1.25rem;
+}
+
+.brandGlow {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 25%, transparent), transparent 70%);
+  pointer-events: none;
+  transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+}
+
+.artLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 3.25rem;
+  pointer-events: none;
+  transition: transform 0.4s var(--ease);
+}
+
+.brand--compact .artLayer {
+  padding-bottom: 2.5rem;
+}
+
+.artLayerFull {
+  padding-bottom: 0;
+}
+
+.brandContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 90%;
+}
+
+.brandTag {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--brand-text) 65%, var(--brand-accent));
+}
+
+.brand--large .brandTag {
+  font-size: 0.6875rem;
+}
+
+.brandTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--brand-text);
+}
+
+.brand--large .brandTitle {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.brand--compact .brandTitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+}
+
+.brandRole {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--brand-text) 55%, transparent);
+}
+
+:global(.card:hover) .brandGlow {
+  transform: scale(1.1);
+}
+
+:global(.card:hover) .artLayer {
+  transform: scale(1.04) translateY(-2px);
+}

@@ -1,5 +1,34 @@
 export type CardSize = "default" | "large" | "compact" | "work";
 
+export type ArtType =
+  | "stripboard"
+  | "funnel"
+  | "chart"
+  | "timeline"
+  | "calendar"
+  | "vault"
+  | "arrow"
+  | "bars"
+  | "play"
+  | "coins"
+  | "wave"
+  | "hex"
+  | "aperture"
+  | "mic"
+  | "light"
+  | "people"
+  | "mountain"
+  | "cut"
+  | "frames"
+  | "reel";
+
+export interface BrandColors {
+  bg: string;
+  bgSecondary: string;
+  text: string;
+  accent: string;
+}
+
 export interface CardItem {
   id: string;
   title: string;
@@ -7,8 +36,11 @@ export interface CardItem {
   description: string;
   role?: string;
   link?: string;
-  image?: string;
-  imageAlt?: string;
+  brand: BrandColors;
+  art: ArtType;
+  /** Full-page screenshot shown inside a browser mockup; falls back to brand art. */
+  screenshot?: string;
+  domain?: string;
 }
 
 export interface WorkItem {
@@ -35,9 +67,10 @@ export interface StatItem {
 
 export interface AudiovisualItem {
   id: string;
-  src: string;
+  label: string;
   alt: string;
-  hoverSrc?: string;
+  brand: BrandColors;
+  art: ArtType;
 }
 
 export const hero = {
@@ -63,14 +96,21 @@ export const navLinks = [
 
 export const projects: CardItem[] = [
   {
-    id: "stripboarder",
-    title: "Stripboarder",
+    id: "shoot",
+    title: "Shoot",
     tag: "React · TypeScript · Film Tech",
     description:
       "Production scheduling tool for film crews — stripboards, call sheets, and day-out-of-days in one workflow.",
-    link: "#",
-    image: "/images/projects/stripboarder.webp",
-    imageAlt: "Stripboarder interface preview",
+    link: "https://shoot-gray.vercel.app/",
+    brand: {
+      bg: "#1a1a1c",
+      bgSecondary: "#2a2a2e",
+      text: "#f0f0f2",
+      accent: "#e8b64c",
+    },
+    art: "stripboard",
+    screenshot: "/images/projects/shoot.webp",
+    domain: "shoot-gray.vercel.app",
   },
   {
     id: "leadflow",
@@ -78,19 +118,31 @@ export const projects: CardItem[] = [
     tag: "AI Creative · Next.js",
     description:
       "AI-powered creative pipeline for lead gen — generates ad variants, copy, and landing pages from a single brief.",
-    link: "#",
-    image: "/images/projects/leadflow.webp",
-    imageAlt: "Leadflow creative dashboard",
+    link: "https://vloom-lead-generator.vercel.app/",
+    brand: {
+      bg: "#0a0a12",
+      bgSecondary: "#14142a",
+      text: "#f4f4ff",
+      accent: "#7c6cf0",
+    },
+    art: "funnel",
+    screenshot: "/images/projects/leadflow.webp",
+    domain: "vloom-lead-generator.vercel.app",
   },
   {
     id: "nauta-engineering",
-    title: "Nauta — Analytics for Airbnb",
-    tag: "Python · Data Pipeline · Dashboards",
+    title: "Nauta",
+    tag: "Python · Data · Airbnb Analytics",
     description:
       "Built the analytics backbone: listing data ingestion, revenue dashboards, and occupancy forecasting for property managers.",
     link: "#",
-    image: "/images/projects/nauta.webp",
-    imageAlt: "Nauta analytics dashboard",
+    brand: {
+      bg: "#0c2430",
+      bgSecondary: "#164a5e",
+      text: "#e4f4f8",
+      accent: "#3db8d4",
+    },
+    art: "chart",
   },
 ];
 
@@ -98,35 +150,54 @@ export const companies: CardItem[] = [
   {
     id: "vloom",
     title: "Vloom",
-    tag: "Founder · Video Production",
+    tag: "Video Production · Content",
     description:
       "Video editing & content production agency. 50+ client projects across SaaS, fintech, and creator brands.",
     role: "Founder & Creative Director",
-    link: "https://vloom.co",
-    image: "/images/companies/vloom.webp",
-    imageAlt: "Vloom brand",
+    link: "https://wearevloom.com/",
+    brand: {
+      bg: "#06060e",
+      bgSecondary: "#10101f",
+      text: "#ffffff",
+      accent: "#4f8cff",
+    },
+    art: "timeline",
+    screenshot: "/images/companies/vloom.webp",
+    domain: "wearevloom.com",
   },
   {
     id: "nauta-company",
     title: "Nauta",
-    tag: "Co-founder · Airbnb Ops",
+    tag: "Airbnb Operations",
     description:
       "Tech operations for Airbnb hosts — portfolio management, pricing strategy, and guest experience at scale.",
     role: "Co-founder & Head of Operations",
     link: "#",
-    image: "/images/companies/nauta.webp",
-    imageAlt: "Nauta operations platform",
+    brand: {
+      bg: "#1a1610",
+      bgSecondary: "#2e2618",
+      text: "#f5efe6",
+      accent: "#c9a96e",
+    },
+    art: "calendar",
   },
   {
     id: "legacy-ledger",
     title: "Legacy Ledger",
-    tag: "Co-founder · Web3",
+    tag: "Web3 · Digital Legacy",
     description:
       "Crypto inheritance and digital legacy platform — secure vaults, beneficiary workflows, and on-chain asset transfer.",
     role: "Co-founder & Product",
-    link: "#",
-    image: "/images/companies/legacy-ledger.webp",
-    imageAlt: "Legacy Ledger platform",
+    link: "https://mylegacyledger.com/",
+    brand: {
+      bg: "#0e0818",
+      bgSecondary: "#1a1030",
+      text: "#ede8f5",
+      accent: "#9d7bea",
+    },
+    art: "vault",
+    screenshot: "/images/companies/legacy-ledger.webp",
+    domain: "mylegacyledger.com",
   },
 ];
 
@@ -177,73 +248,80 @@ export const speaking: SpeakingItem[] = [
   },
 ];
 
-export const consultancy: CardItem[] = [
+export interface GigItem {
+  id: string;
+  title: string;
+  link?: string;
+  logo: string;
+}
+
+export const consultancy: GigItem[] = [
   {
     id: "travel-diaries",
     title: "Travel Diaries",
-    description: "Sales & growth expansion into the US market.",
-    image: "/images/consultancy/travel-diaries.webp",
+    link: "https://traveldiariesapp.com",
+    logo: "/images/logos/travel-diaries.png",
   },
   {
     id: "datumcon",
     title: "Datumcon",
-    description: "Growth & sales consultancy for data-driven B2B.",
-    image: "/images/consultancy/datumcon.webp",
+    link: "https://datumcon.com",
+    logo: "/images/logos/datumcon.png",
   },
   {
     id: "original-productions",
     title: "Original Productions",
-    description: "Video content strategy and production consulting.",
-    image: "/images/consultancy/original-productions.webp",
+    logo: "/images/logos/original-productions.png",
   },
   {
     id: "koinly",
     title: "Koinly",
-    description: "Video producer for crypto tax platform campaigns.",
-    image: "/images/consultancy/koinly.webp",
+    link: "https://koinly.io",
+    logo: "/images/logos/koinly.png",
   },
   {
     id: "voice123",
     title: "Voice123",
-    description: "Sales consultancy — pipeline optimization & outbound.",
-    image: "/images/consultancy/voice123.webp",
+    link: "https://voice123.com",
+    logo: "/images/logos/voice123.png",
   },
   {
     id: "ethglobal",
     title: "ETHGlobal NY 2026",
-    description: "Hacker — built on-chain tooling in 36 hours.",
-    tag: "Hackathon",
-    image: "/images/consultancy/ethglobal.webp",
+    link: "https://ethglobal.com",
+    logo: "/images/logos/ethglobal.png",
   },
 ];
 
 export const photos: AudiovisualItem[] = [
-  { id: "p1", src: "/images/audiovisual/photo-1.webp", alt: "On set directing", hoverSrc: "/images/audiovisual/photo-1-hover.webp" },
-  { id: "p2", src: "/images/audiovisual/photo-2.webp", alt: "Conference speaking", hoverSrc: "/images/audiovisual/photo-2-hover.webp" },
-  { id: "p3", src: "/images/audiovisual/photo-3.webp", alt: "Studio production", hoverSrc: "/images/audiovisual/photo-3-hover.webp" },
-  { id: "p4", src: "/images/audiovisual/photo-4.webp", alt: "Team workshop", hoverSrc: "/images/audiovisual/photo-4-hover.webp" },
-  { id: "p5", src: "/images/audiovisual/photo-5.webp", alt: "Location shoot", hoverSrc: "/images/audiovisual/photo-5-hover.webp" },
-  { id: "p6", src: "/images/audiovisual/photo-6.webp", alt: "Editing suite", hoverSrc: "/images/audiovisual/photo-6-hover.webp" },
+  { id: "p1", label: "On Set", alt: "On set directing", brand: { bg: "#221610", bgSecondary: "#4a3020", text: "#faf0e8", accent: "#c4784a" }, art: "aperture" },
+  { id: "p2", label: "Speaking", alt: "Conference speaking", brand: { bg: "#141a22", bgSecondary: "#283848", text: "#e8f0f8", accent: "#6a90b8" }, art: "mic" },
+  { id: "p3", label: "Studio", alt: "Studio production", brand: { bg: "#181614", bgSecondary: "#302820", text: "#f0ebe4", accent: "#8a7868" }, art: "light" },
+  { id: "p4", label: "Workshop", alt: "Team workshop", brand: { bg: "#141a14", bgSecondary: "#283828", text: "#e8f0e8", accent: "#6a9850" }, art: "people" },
+  { id: "p5", label: "Location", alt: "Location shoot", brand: { bg: "#201610", bgSecondary: "#403020", text: "#f8f0e8", accent: "#a07858" }, art: "mountain" },
+  { id: "p6", label: "Editing", alt: "Editing suite", brand: { bg: "#0e1420", bgSecondary: "#1c2840", text: "#e8eef8", accent: "#406898" }, art: "cut" },
 ];
 
 export const videos: AudiovisualItem[] = [
-  { id: "v1", src: "/images/audiovisual/video-1.webp", alt: "Brand reel still", hoverSrc: "/images/audiovisual/video-1-hover.webp" },
-  { id: "v2", src: "/images/audiovisual/video-2.webp", alt: "Campaign spot still", hoverSrc: "/images/audiovisual/video-2-hover.webp" },
-  { id: "v3", src: "/images/audiovisual/video-3.webp", alt: "Documentary frame", hoverSrc: "/images/audiovisual/video-3-hover.webp" },
-  { id: "v4", src: "/images/audiovisual/video-4.webp", alt: "Social content still", hoverSrc: "/images/audiovisual/video-4-hover.webp" },
+  { id: "v1", label: "Brand Reel", alt: "Brand reel still", brand: { bg: "#1e1018", bgSecondary: "#3a2030", text: "#f8eef2", accent: "#a04868" }, art: "reel" },
+  { id: "v2", label: "Campaign", alt: "Campaign spot still", brand: { bg: "#14141e", bgSecondary: "#282840", text: "#eeeef8", accent: "#6868a8" }, art: "play" },
+  { id: "v3", label: "Documentary", alt: "Documentary frame", brand: { bg: "#141814", bgSecondary: "#283028", text: "#eef4ee", accent: "#688868" }, art: "frames" },
+  { id: "v4", label: "Social", alt: "Social content still", brand: { bg: "#1e1814", bgSecondary: "#383028", text: "#f4f0ec", accent: "#a08878" }, art: "wave" },
 ];
 
 export const contact = {
   availability: ["Speaking", "Consulting", "Hiring"],
-  email: "hello@juanpablo.dev",
-  calendar: "https://cal.com/juanpablo",
+  email: "juanpablo.vdb@gmail.com",
+  calendar: "https://calendar.app.google/Kt5bXaz3eRbXCac49",
   social: [
-    { label: "LinkedIn", url: "https://linkedin.com/in/juanpablo" },
-    { label: "GitHub", url: "https://github.com/juanpablo" },
-    { label: "Vloom", url: "https://vloom.co" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/juan-pablo-val-de-blanquez-romero-14a47914b/" },
+    { label: "GitHub", url: "https://github.com/juanpablovdb-creator" },
+    { label: "Vloom", url: "https://wearevloom.com/" },
   ],
 };
 
 export const masterclassInquiry = {
-  recipientEmail: contact.email,
+  spreadsheetId: "1L9IkHRjuereozAs9uhKR3bcMImoHZ1AHPblAbZLE5jQ",
+  spreadsheetUrl:
+    "https://docs.google.com/spreadsheets/d/1L9IkHRjuereozAs9uhKR3bcMImoHZ1AHPblAbZLE5jQ",
 };

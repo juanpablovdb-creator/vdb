@@ -1,40 +1,14 @@
 import { useState } from "react";
 import { photos, videos } from "../data/content";
 import type { AudiovisualItem } from "../data/content";
+import { CardBrandArt } from "./CardBrandArt";
 import styles from "./AudiovisualSection.module.css";
 
 function GridItem({ item }: { item: AudiovisualItem }) {
-  const [failed, setFailed] = useState(false);
-
   return (
     <figure className={styles.item}>
-      {failed ? (
-        <div className={styles.placeholder} aria-hidden="true">
-          ◎
-        </div>
-      ) : (
-        <>
-          <img
-            className={`${styles.imageLayer} ${styles.imagePrimary}`}
-            src={item.src}
-            alt={item.alt}
-            loading="lazy"
-            onError={() => setFailed(true)}
-          />
-          {item.hoverSrc && (
-            <img
-              className={`${styles.imageLayer} ${styles.imageHover}`}
-              src={item.hoverSrc}
-              alt=""
-              aria-hidden="true"
-              loading="lazy"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = "none";
-              }}
-            />
-          )}
-        </>
-      )}
+      <CardBrandArt title={item.label} brand={item.brand} art={item.art} size="compact" />
+      <figcaption className="sr-only">{item.alt}</figcaption>
     </figure>
   );
 }
