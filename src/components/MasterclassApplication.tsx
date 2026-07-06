@@ -8,9 +8,7 @@ import {
   initialMasterclassApplication,
   masterclassIndustries,
   masterclassLearningTopics,
-  masterclassSessionFormats,
   masterclassTeamSizes,
-  masterclassTimelines,
   masterclassTools,
   type LearningTopicId,
   type MasterclassApplicationData,
@@ -24,7 +22,7 @@ interface MasterclassApplicationProps {
   homeHref?: string;
 }
 
-const TOTAL_STEPS = 22;
+const TOTAL_STEPS = 21;
 
 export function MasterclassApplication({
   open,
@@ -34,6 +32,7 @@ export function MasterclassApplication({
 }: MasterclassApplicationProps) {
   const titleId = useId();
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
+  const advanceTimer = useRef<number | null>(null);
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<MasterclassApplicationData>(initialMasterclassApplication);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -70,6 +69,12 @@ export function MasterclassApplication({
     }
   }, [open, step, status]);
 
+  useEffect(() => {
+    return () => {
+      if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+    };
+  }, []);
+
   if (!open) return null;
 
   const update = <K extends keyof MasterclassApplicationData>(
@@ -88,6 +93,18 @@ export function MasterclassApplication({
     }));
   };
 
+  const MAX_TOPICS = 3;
+
+  const toggleTopic = (topic: LearningTopicId) => {
+    setForm((prev) => {
+      if (prev.learningTopics.includes(topic)) {
+        return { ...prev, learningTopics: prev.learningTopics.filter((t) => t !== topic) };
+      }
+      if (prev.learningTopics.length >= MAX_TOPICS) return prev;
+      return { ...prev, learningTopics: [...prev.learningTopics, topic] };
+    });
+  };
+
   const progress = ((step + 1) / TOTAL_STEPS) * 100;
 
   const goNext = () => {
@@ -97,8 +114,27 @@ export function MasterclassApplication({
   };
 
   const goBack = () => {
+    if (advanceTimer.current) {
+      window.clearTimeout(advanceTimer.current);
+      advanceTimer.current = null;
+    }
     setDirection("back");
     setStep((s) => Math.max(s - 1, 0));
+  };
+
+  // Single-choice steps advance on their own; the delay lets the
+  // selection highlight register before the next question slides in.
+  const selectAndAdvance = <K extends keyof MasterclassApplicationData>(
+    field: K,
+    value: MasterclassApplicationData[K],
+  ) => {
+    update(field, value);
+    setDirection("forward");
+    if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+    advanceTimer.current = window.setTimeout(() => {
+      advanceTimer.current = null;
+      setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1));
+    }, 300);
   };
 
   const canProceed = (): boolean => {
@@ -138,15 +174,13 @@ export function MasterclassApplication({
       case 16:
         return !!form.participantCount;
       case 17:
-        return !!form.learningTopic;
+        return form.learningTopics.length > 0;
       case 18:
         return form.biggestChallenge.trim().length > 10;
       case 19:
         return form.successOutcome.trim().length > 10;
       case 20:
-        return !!form.sessionFormat;
-      case 21:
-        return !!form.timeline;
+        return true;
       default:
         return true;
     }
@@ -213,7 +247,7 @@ export function MasterclassApplication({
               Let&apos;s tailor your session
             </h2>
             <p className={styles.hint}>
-              22 quick questions — about 4 minutes. Your answers help us design the right
+              19 quick questions — about 3 minutes. Your answers help us design the right
               masterclass for you or your team.
             </p>
             <button type="button" className={styles.primaryBtn} onClick={goNext}>
@@ -312,7 +346,7 @@ export function MasterclassApplication({
             question="How would you rate your overall AI experience?"
             choices={["Beginner", "Intermediate", "Advanced", "Technical / builder"]}
             value={form.experienceLevel}
-            onChange={(v) => update("experienceLevel", v)}
+            onChange={(v) => selectAndAdvance("experienceLevel", v)}
             className={stepClass}
           />
         );
@@ -325,7 +359,7 @@ export function MasterclassApplication({
             hint="ChatGPT, Claude, Gemini, Copilot…"
             choices={["Never used", "Tried a few times", "Use weekly", "Use daily"]}
             value={form.usesChatTools}
-            onChange={(v) => update("usesChatTools", v)}
+            onChange={(v) => selectAndAdvance("usesChatTools", v)}
             className={stepClass}
           />
         );
@@ -343,7 +377,7 @@ export function MasterclassApplication({
               "Built production automations",
             ]}
             value={form.automationExperience}
-            onChange={(v) => update("automationExperience", v)}
+            onChange={(v) => selectAndAdvance("automationExperience", v)}
             className={stepClass}
           />
         );
@@ -360,7 +394,7 @@ export function MasterclassApplication({
               "Software engineer",
             ]}
             value={form.codingExperience}
-            onChange={(v) => update("codingExperience", v)}
+            onChange={(v) => selectAndAdvance("codingExperience", v)}
             className={stepClass}
           />
         );
@@ -377,7 +411,7 @@ export function MasterclassApplication({
               "Advanced / production prompts",
             ]}
             value={form.promptEngineering}
-            onChange={(v) => update("promptEngineering", v)}
+            onChange={(v) => selectAndAdvance("promptEngineering", v)}
             className={stepClass}
           />
         );
@@ -394,7 +428,7 @@ export function MasterclassApplication({
               "Used in production",
             ]}
             value={form.apiExperience}
-            onChange={(v) => update("apiExperience", v)}
+            onChange={(v) => selectAndAdvance("apiExperience", v)}
             className={stepClass}
           />
         );
@@ -405,7 +439,7 @@ export function MasterclassApplication({
             <p className={styles.stepNumber}>{step} →</p>
             <h2 className={styles.question}>Which AI tools do you currently use?</h2>
             <p className={styles.hint}>Select all that apply.</p>
-            <div className={styles.choiceList}>
+            <div className={styles.choiceGrid}>
               {masterclassTools.map((tool) => (
                 <button
                   key={tool}
@@ -432,7 +466,7 @@ export function MasterclassApplication({
               "Multiple trainings",
             ]}
             value={form.previousTraining}
-            onChange={(v) => update("previousTraining", v)}
+            onChange={(v) => selectAndAdvance("previousTraining", v)}
             className={stepClass}
           />
         );
@@ -442,13 +476,17 @@ export function MasterclassApplication({
           <div className={`${styles.stepContent} ${stepClass}`} key={step}>
             <p className={styles.stepNumber}>{step} →</p>
             <h2 className={styles.question}>What industry are you in?</h2>
-            <div className={styles.choiceList}>
+            <div className={styles.choiceGrid}>
               {masterclassIndustries.map((industry) => (
                 <button
                   key={industry}
                   type="button"
                   className={`${styles.choiceBtn} ${form.industry === industry ? styles.choiceBtnActive : ""}`}
-                  onClick={() => update("industry", industry)}
+                  onClick={() =>
+                    industry === "Other"
+                      ? update("industry", industry)
+                      : selectAndAdvance("industry", industry)
+                  }
                 >
                   {industry}
                 </button>
@@ -475,7 +513,7 @@ export function MasterclassApplication({
             question="How big is your team or company?"
             choices={[...masterclassTeamSizes]}
             value={form.teamSize}
-            onChange={(v) => update("teamSize", v)}
+            onChange={(v) => selectAndAdvance("teamSize", v)}
             className={stepClass}
           />
         );
@@ -487,7 +525,7 @@ export function MasterclassApplication({
             question="How many people will take the course?"
             choices={["Just me", "2–5", "6–15", "16–30", "30+"]}
             value={form.participantCount}
-            onChange={(v) => update("participantCount", v)}
+            onChange={(v) => selectAndAdvance("participantCount", v)}
             className={stepClass}
           />
         );
@@ -497,18 +535,23 @@ export function MasterclassApplication({
           <div className={`${styles.stepContent} ${stepClass}`} key={step}>
             <p className={styles.stepNumber}>{step} →</p>
             <h2 className={styles.question}>What do you want to learn most?</h2>
-            <p className={styles.hint}>Pick your primary focus.</p>
-            <div className={styles.topicGrid}>
-              {masterclassLearningTopics.map((topic) => (
-                <button
-                  key={topic.id}
-                  type="button"
-                  className={`${styles.topicBtn} ${form.learningTopic === topic.id ? styles.topicBtnActive : ""}`}
-                  onClick={() => update("learningTopic", topic.id as LearningTopicId)}
-                >
-                  {topic.label}
-                </button>
-              ))}
+            <p className={styles.hint}>Pick up to 3.</p>
+            <div className={styles.choiceList}>
+              {masterclassLearningTopics.map((topic) => {
+                const selected = form.learningTopics.includes(topic.id);
+                const full = form.learningTopics.length >= MAX_TOPICS;
+                return (
+                  <button
+                    key={topic.id}
+                    type="button"
+                    className={`${styles.choiceBtn} ${selected ? styles.choiceBtnActive : ""}`}
+                    disabled={!selected && full}
+                    onClick={() => toggleTopic(topic.id)}
+                  >
+                    {topic.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         );
@@ -553,52 +596,30 @@ export function MasterclassApplication({
 
       case 20:
         return (
-          <ChoiceStep
+          <StepShell
             step={step}
-            question="What session format works best?"
-            choices={[...masterclassSessionFormats]}
-            value={form.sessionFormat}
-            onChange={(v) => update("sessionFormat", v)}
+            question="Anything else important?"
+            hint="Specific tools, constraints, or context we should know about."
             className={stepClass}
-          />
-        );
-
-      case 21:
-        return (
-          <div className={`${styles.stepContent} ${stepClass}`} key={step}>
-            <p className={styles.stepNumber}>{step} →</p>
-            <h2 className={styles.question}>When are you looking to run this?</h2>
-            <div className={styles.choiceList}>
-              {masterclassTimelines.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  className={`${styles.choiceBtn} ${form.timeline === option ? styles.choiceBtnActive : ""}`}
-                  onClick={() => update("timeline", option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-            <label className={styles.optionalField}>
-              <span className={styles.optionalLabel}>Anything else? (optional)</span>
-              <textarea
-                className={styles.textArea}
-                rows={3}
-                placeholder="Specific tools, constraints, or context…"
-                value={form.additionalGoals}
-                onChange={(e) => update("additionalGoals", e.target.value)}
-              />
-            </label>
+            optional
+          >
+            <textarea
+              ref={inputRef as React.RefObject<HTMLTextAreaElement>}
+              className={styles.textArea}
+              rows={4}
+              placeholder="Type your answer here…"
+              value={form.additionalGoals}
+              onChange={(e) => update("additionalGoals", e.target.value)}
+            />
             <button
               type="button"
               className={styles.primaryBtn}
-              disabled={!canProceed() || status === "submitting"}
+              disabled={status === "submitting"}
               onClick={submit}
             >
               {status === "submitting" ? "Sending…" : "Submit application"}
             </button>
-          </div>
+          </StepShell>
         );
 
       default:

@@ -40,21 +40,6 @@ export const masterclassTeamSizes = [
   "200+ people",
 ] as const;
 
-export const masterclassSessionFormats = [
-  "Half-day workshop",
-  "Full-day hands-on lab",
-  "Keynote + Q&A",
-  "Multi-week program",
-  "1:1 coaching",
-] as const;
-
-export const masterclassTimelines = [
-  "ASAP — within 4 weeks",
-  "1–3 months",
-  "3–6 months",
-  "Just exploring options",
-] as const;
-
 export type LearningTopicId = (typeof masterclassLearningTopics)[number]["id"];
 
 export interface MasterclassApplicationData {
@@ -75,11 +60,9 @@ export interface MasterclassApplicationData {
   industryOther: string;
   teamSize: string;
   participantCount: string;
-  learningTopic: LearningTopicId | "";
+  learningTopics: LearningTopicId[];
   biggestChallenge: string;
   successOutcome: string;
-  sessionFormat: string;
-  timeline: string;
   additionalGoals: string;
 }
 
@@ -101,10 +84,8 @@ export const initialMasterclassApplication: MasterclassApplicationData = {
   industryOther: "",
   teamSize: "",
   participantCount: "",
-  learningTopic: "",
+  learningTopics: [],
   biggestChallenge: "",
   successOutcome: "",
-  sessionFormat: "",
-  timeline: "",
   additionalGoals: "",
 };

@@ -14,13 +14,15 @@ export function buildMasterclassPayload(
 ): MasterclassSubmission {
   const industry =
     form.industry === "Other" ? form.industryOther.trim() || "Other" : form.industry;
-  const topic = masterclassLearningTopics.find((t) => t.id === form.learningTopic);
+  const topicLabels = masterclassLearningTopics
+    .filter((t) => form.learningTopics.includes(t.id))
+    .map((t) => t.label);
 
   return {
     ...form,
     session: sessionTitle,
     industry,
-    learning_topic: topic?.label ?? form.learningTopic,
+    learning_topic: topicLabels.join(", "),
     current_tools: form.currentTools.join(", "),
   };
 }
