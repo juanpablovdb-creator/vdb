@@ -178,6 +178,25 @@ button {
   max-width: 900px;
 }
 
+.work-group-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1.25rem;
+}
+
+.work-group + .work-group,
+.work-group--consulting {
+  margin-top: 3.5rem;
+}
+
+.work-group--consulting .card-grid--work {
+  margin-top: 2rem;
+}
+
 @media (max-width: 640px) {
   .section {
     padding-block: 4rem;

@@ -1,8 +1,8 @@
 .hero {
-  padding-block: 8rem 5rem;
-  min-height: 85vh;
+  padding-block: 2.5rem 4.5rem;
+  min-height: auto;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .heroInner {
@@ -32,7 +32,7 @@
 .tagline {
   font-family: var(--font-display);
   font-stretch: 125%;
-  font-size: clamp(2.5rem, 7vw, 5.75rem);
+  font-size: clamp(2.1rem, 5.75vw, 4.6rem);
   font-weight: 850;
   line-height: 0.92;
   letter-spacing: -0.02em;
@@ -58,7 +58,7 @@
 .statValue {
   font-family: var(--font-display);
   font-stretch: 125%;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.1rem, 4.25vw, 3.4rem);
   font-weight: 850;
   letter-spacing: -0.02em;
   line-height: 0.99;
@@ -80,8 +80,7 @@
 
 @media (max-width: 640px) {
   .hero {
-    padding-block: 6rem 3rem;
-    min-height: auto;
+    padding-block: 1.75rem 3rem;
   }
 
   .tagline {

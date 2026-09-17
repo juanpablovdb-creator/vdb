@@ -1,0 +1,13 @@
+---
+description: Reminder to restore and relaunch the hidden Media (photo & video) section
+alwaysApply: true
+---
+
+# Media section is hidden — do not forget
+
+The Photo & Video / Portfolio section (`AudiovisualSection`, `#media`) is **intentionally hidden** until real photo and video assets are ready.
+
+- Component still exists at `src/components/AudiovisualSection.tsx`
+- It was removed from `src/App.tsx` and the Media nav link was removed from `navLinks` in `src/data/content.ts`
+
+When the user has photos/videos, or asks to finish the site, **bring this up**: restore the section, swap placeholder brand-art tiles for real media, put Media back in the nav, and **redeploy to Vercel**.

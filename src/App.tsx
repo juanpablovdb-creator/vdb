@@ -2,9 +2,8 @@ import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { GigMarquee } from "./components/Marquee";
 import { Card, WorkCard, SpeakingCard } from "./components/Card";
-import { AudiovisualSection } from "./components/AudiovisualSection";
 import { ContactSection } from "./components/ContactSection";
-import { projects, companies, previousWork, speaking } from "./data/content";
+import { projects, companies, previousWorkFullTime, previousWorkConsulting, speaking } from "./data/content";
 
 export function App() {
   return (
@@ -12,18 +11,6 @@ export function App() {
       <Nav />
       <main>
         <Hero />
-
-        <section id="projects" className="section">
-          <div className="container">
-            <p className="section-label">Engineering</p>
-            <h2 className="section-title">Engineering Projects</h2>
-            <div className="card-grid card-grid--projects">
-              {projects.map((item) => (
-                <Card key={item.id} item={item} />
-              ))}
-            </div>
-          </div>
-        </section>
 
         <section id="companies" className="section">
           <div className="container">
@@ -37,20 +24,56 @@ export function App() {
           </div>
         </section>
 
+        <section id="projects" className="section">
+          <div className="container">
+            <p className="section-label">Engineering</p>
+            <h2 className="section-title">Engineering Projects</h2>
+            <div className="card-grid card-grid--projects">
+              {projects.map((item) => (
+                <Card key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="previous-work" className="section">
           <div className="container">
             <p className="section-label">Experience</p>
             <h2 className="section-title">Previous Work</h2>
-            <div className="card-grid card-grid--work">
-              {previousWork.map((item) => (
-                <WorkCard
-                  key={item.id}
-                  title={item.title}
-                  company={item.company}
-                  period={item.period}
-                  description={item.description}
-                />
-              ))}
+
+            <div className="work-group">
+              <p className="work-group-label">Full-time & founder roles</p>
+              <div className="card-grid card-grid--work">
+                {previousWorkFullTime.map((item) => (
+                  <WorkCard
+                    key={item.id}
+                    title={item.title}
+                    company={item.company}
+                    period={item.period}
+                    description={item.description}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div id="consultancy" className="work-group work-group--consulting">
+            <div className="container">
+              <p className="work-group-label">Consulting engagements</p>
+            </div>
+            <GigMarquee />
+            <div className="container">
+              <div className="card-grid card-grid--work">
+                {previousWorkConsulting.map((item) => (
+                  <WorkCard
+                    key={item.id}
+                    title={item.title}
+                    company={item.company}
+                    period={item.period}
+                    description={item.description}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -74,15 +97,7 @@ export function App() {
           </div>
         </section>
 
-        <section id="consultancy" className="section">
-          <div className="container">
-            <p className="section-label">Consulting</p>
-            <h2 className="section-title">Consultancy & Side Gigs</h2>
-          </div>
-          <GigMarquee />
-        </section>
-
-        <AudiovisualSection />
+        {/* TODO: restore <AudiovisualSection /> once photo/video assets are ready, then redeploy. */}
         <ContactSection />
       </main>
     </>

@@ -1,7 +1,7 @@
 import { hero } from "../data/content";
 import styles from "./Hero.module.css";
 
-const MUTED_PHRASES = ["sell with story", "code by vibe"];
+const MUTED_PHRASES = ["sell with storytelling", "build in code"];
 
 export function Hero() {
   const taglineParts = splitTagline(hero.tagline);

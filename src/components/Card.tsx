@@ -2,6 +2,7 @@ import type { CardItem, CardSize } from "../data/content";
 import { MasterclassApplication } from "./MasterclassApplication";
 import { CardBrandArt } from "./CardBrandArt";
 import { BrowserMockup } from "./BrowserMockup";
+import { ScreenshotMosaic } from "./ScreenshotMosaic";
 import styles from "./Card.module.css";
 import { useState } from "react";
 
@@ -37,7 +38,9 @@ export function Card({ item, size = "default" }: CardProps) {
 
       {showMedia && (
         <div className={styles.cardMedia}>
-          {item.screenshot ? (
+          {item.screenshots && item.screenshots.length > 1 ? (
+            <ScreenshotMosaic images={item.screenshots} alt={`${item.title} screenshots`} />
+          ) : item.screenshot ? (
             <BrowserMockup
               src={item.screenshot}
               alt={`${item.title} website`}

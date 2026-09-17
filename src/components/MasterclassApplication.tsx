@@ -22,7 +22,7 @@ interface MasterclassApplicationProps {
   homeHref?: string;
 }
 
-const TOTAL_STEPS = 21;
+const TOTAL_STEPS = 20;
 
 export function MasterclassApplication({
   open,
@@ -172,14 +172,12 @@ export function MasterclassApplication({
       case 15:
         return !!form.teamSize;
       case 16:
-        return !!form.participantCount;
-      case 17:
         return form.learningTopics.length > 0;
-      case 18:
+      case 17:
         return form.biggestChallenge.trim().length > 10;
-      case 19:
+      case 18:
         return form.successOutcome.trim().length > 10;
-      case 20:
+      case 19:
         return true;
       default:
         return true;
@@ -247,7 +245,7 @@ export function MasterclassApplication({
               Let&apos;s tailor your session
             </h2>
             <p className={styles.hint}>
-              19 quick questions — about 3 minutes. Your answers help us design the right
+              18 quick questions, about 3 minutes. Your answers help us design the right
               masterclass for you or your team.
             </p>
             <button type="button" className={styles.primaryBtn} onClick={goNext}>
@@ -292,7 +290,7 @@ export function MasterclassApplication({
           <StepShell
             step={step}
             question="Where do you work?"
-            hint="Company or team name — skip if freelance or solo."
+            hint="Company or team name. Skip if freelance or solo."
             className={stepClass}
             optional
           >
@@ -460,7 +458,7 @@ export function MasterclassApplication({
             step={step}
             question="Have you had formal AI training before?"
             choices={[
-              "No — this would be my first",
+              "No, this would be my first",
               "A workshop or webinar",
               "Online course",
               "Multiple trainings",
@@ -520,18 +518,6 @@ export function MasterclassApplication({
 
       case 16:
         return (
-          <ChoiceStep
-            step={step}
-            question="How many people will take the course?"
-            choices={["Just me", "2–5", "6–15", "16–30", "30+"]}
-            value={form.participantCount}
-            onChange={(v) => selectAndAdvance("participantCount", v)}
-            className={stepClass}
-          />
-        );
-
-      case 17:
-        return (
           <div className={`${styles.stepContent} ${stepClass}`} key={step}>
             <p className={styles.stepNumber}>{step} →</p>
             <h2 className={styles.question}>What do you want to learn most?</h2>
@@ -556,12 +542,12 @@ export function MasterclassApplication({
           </div>
         );
 
-      case 18:
+      case 17:
         return (
           <StepShell
             step={step}
             question="What's your biggest challenge with AI right now?"
-            hint="Be specific — adoption, quality, speed, team buy-in, tooling…"
+            hint="Be specific: adoption, quality, speed, team buy-in, tooling…"
             className={stepClass}
           >
             <textarea
@@ -575,7 +561,7 @@ export function MasterclassApplication({
           </StepShell>
         );
 
-      case 19:
+      case 18:
         return (
           <StepShell
             step={step}
@@ -594,7 +580,7 @@ export function MasterclassApplication({
           </StepShell>
         );
 
-      case 20:
+      case 19:
         return (
           <StepShell
             step={step}

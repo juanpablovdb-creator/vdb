@@ -59,7 +59,6 @@ export interface MasterclassApplicationData {
   industry: string;
   industryOther: string;
   teamSize: string;
-  participantCount: string;
   learningTopics: LearningTopicId[];
   biggestChallenge: string;
   successOutcome: string;
@@ -83,7 +82,6 @@ export const initialMasterclassApplication: MasterclassApplicationData = {
   industry: "",
   industryOther: "",
   teamSize: "",
-  participantCount: "",
   learningTopics: [],
   biggestChallenge: "",
   successOutcome: "",

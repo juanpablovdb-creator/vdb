@@ -8,7 +8,7 @@ const path = window.location.pathname.replace(/\/+$/, "") || "/";
 const isAICourse = path === "/ai-course";
 
 if (isAICourse) {
-  document.title = "AI Masterclass — VDB";
+  document.title = "AI Masterclass | VDB";
 }
 
 createRoot(document.getElementById("root")!).render(

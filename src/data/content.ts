@@ -40,6 +40,8 @@ export interface CardItem {
   art: ArtType;
   /** Full-page screenshot shown inside a browser mockup; falls back to brand art. */
   screenshot?: string;
+  /** Multiple product screenshots; the mockup crossfades between them. */
+  screenshots?: string[];
   domain?: string;
 }
 
@@ -76,48 +78,30 @@ export interface AudiovisualItem {
 export const hero = {
   name: "Juan Pablo",
   tagline:
-    "Technical creative builder. I ship with data, sell with story, and code by vibe.",
+    "Growth & AI automation builder. I ship with data, sell with storytelling, and build in code.",
   stats: [
+    { value: "$1M+", label: "revenue generated" },
     { value: "3", label: "companies built" },
     { value: "8+", label: "years building" },
-    { value: "4", label: "countries" },
   ] satisfies StatItem[],
 };
 
 export const navLinks = [
-  { id: "projects", label: "Projects" },
   { id: "companies", label: "Companies" },
+  { id: "projects", label: "Projects" },
   { id: "previous-work", label: "Previous Work" },
   { id: "education", label: "Education" },
   { id: "consultancy", label: "Consultancy" },
-  { id: "media", label: "Media" },
   { id: "contact", label: "Contact" },
 ];
 
 export const projects: CardItem[] = [
   {
-    id: "shoot",
-    title: "Shoot",
-    tag: "React · TypeScript · Film Tech",
-    description:
-      "Production scheduling tool for film crews — stripboards, call sheets, and day-out-of-days in one workflow.",
-    link: "https://shoot-gray.vercel.app/",
-    brand: {
-      bg: "#1a1a1c",
-      bgSecondary: "#2a2a2e",
-      text: "#f0f0f2",
-      accent: "#e8b64c",
-    },
-    art: "stripboard",
-    screenshot: "/images/projects/shoot.webp",
-    domain: "shoot-gray.vercel.app",
-  },
-  {
     id: "leadflow",
     title: "Leadflow",
-    tag: "AI Creative · Next.js",
+    tag: "Lead Gen · CRM · Next.js",
     description:
-      "AI-powered creative pipeline for lead gen — generates ad variants, copy, and landing pages from a single brief.",
+      "Lead generation platform built to run Vloom's outbound. Company discovery, persona enrichment, CRM kanban, and KPI tracking in one tool.",
     link: "https://vloom-lead-generator.vercel.app/",
     brand: {
       bg: "#0a0a12",
@@ -126,7 +110,14 @@ export const projects: CardItem[] = [
       accent: "#7c6cf0",
     },
     art: "funnel",
-    screenshot: "/images/projects/leadflow.webp",
+    screenshot: "/images/projects/leadflow-1.webp",
+    screenshots: [
+      "/images/projects/leadflow-1.webp",
+      "/images/projects/leadflow-2.webp",
+      "/images/projects/leadflow-3.webp",
+      "/images/projects/leadflow-4.webp",
+      "/images/projects/leadflow-5.webp",
+    ],
     domain: "vloom-lead-generator.vercel.app",
   },
   {
@@ -143,6 +134,61 @@ export const projects: CardItem[] = [
       accent: "#3db8d4",
     },
     art: "chart",
+    screenshot: "/images/projects/nauta-1.webp",
+    screenshots: [
+      "/images/projects/nauta-logo.webp",
+      "/images/projects/nauta-1.webp",
+      "/images/projects/nauta-2.webp",
+      "/images/projects/nauta-3.webp",
+      "/images/projects/nauta-4.webp",
+    ],
+  },
+  {
+    id: "austral-quoter",
+    title: "Quote Builder",
+    tag: "Cursor · Pricing",
+    description:
+      "Quoting tool built for Austral Consultants. Replaced manual pricing lookups across the entire advisor team.",
+    link: "#",
+    brand: {
+      bg: "#101c14",
+      bgSecondary: "#1c3424",
+      text: "#e8f4ec",
+      accent: "#4caf6e",
+    },
+    art: "coins",
+  },
+  {
+    id: "austral-automations",
+    title: "WhatsApp Sales Bot",
+    tag: "Automation · Kommo · Composio",
+    description:
+      "WhatsApp sales bot and CRM automation stack for Austral. Lead routing and client nurturing end to end, saving the sales team 35+ hours.",
+    link: "#",
+    brand: {
+      bg: "#0c1a20",
+      bgSecondary: "#183440",
+      text: "#e6f2f6",
+      accent: "#38b6c9",
+    },
+    art: "arrow",
+  },
+  {
+    id: "shoot",
+    title: "Shoot",
+    tag: "React · TypeScript · Film Tech",
+    description:
+      "Production scheduling tool for film crews. Stripboards, call sheets, and day-out-of-days in one workflow.",
+    link: "https://shoot-gray.vercel.app/",
+    brand: {
+      bg: "#1a1a1c",
+      bgSecondary: "#2a2a2e",
+      text: "#f0f0f2",
+      accent: "#e8b64c",
+    },
+    art: "stripboard",
+    screenshot: "/images/projects/shoot.webp",
+    domain: "shoot-gray.vercel.app",
   },
 ];
 
@@ -150,10 +196,10 @@ export const companies: CardItem[] = [
   {
     id: "vloom",
     title: "Vloom",
-    tag: "Video Production · Content",
+    tag: "Video Production · Content Strategy",
     description:
-      "Video editing & content production agency. 50+ client projects across SaaS, fintech, and creator brands.",
-    role: "Founder & Creative Director",
+      "B2B video production and content strategy company. 20-person team, 64 clients served, 48% retention, $387K revenue in two years.",
+    role: "Co-founder & CEO",
     link: "https://wearevloom.com/",
     brand: {
       bg: "#06060e",
@@ -163,6 +209,12 @@ export const companies: CardItem[] = [
     },
     art: "timeline",
     screenshot: "/images/companies/vloom.webp",
+    screenshots: [
+      "/images/companies/vloom-1.webp",
+      "/images/companies/vloom-2.webp",
+      "/images/companies/vloom-3.webp",
+      "/images/companies/vloom-4.webp",
+    ],
     domain: "wearevloom.com",
   },
   {
@@ -170,7 +222,7 @@ export const companies: CardItem[] = [
     title: "Nauta",
     tag: "Airbnb Operations",
     description:
-      "Tech operations for Airbnb hosts — portfolio management, pricing strategy, and guest experience at scale.",
+      "Tech operations for Airbnb hosts. Portfolio management, pricing strategy, and guest experience at scale.",
     role: "Co-founder & Head of Operations",
     link: "#",
     brand: {
@@ -180,13 +232,21 @@ export const companies: CardItem[] = [
       accent: "#c9a96e",
     },
     art: "calendar",
+    screenshot: "/images/projects/nauta-1.webp",
+    screenshots: [
+      "/images/projects/nauta-logo.webp",
+      "/images/projects/nauta-1.webp",
+      "/images/projects/nauta-2.webp",
+      "/images/projects/nauta-3.webp",
+      "/images/projects/nauta-4.webp",
+    ],
   },
   {
     id: "legacy-ledger",
     title: "Legacy Ledger",
     tag: "Web3 · Digital Legacy",
     description:
-      "Crypto inheritance and digital legacy platform — secure vaults, beneficiary workflows, and on-chain asset transfer.",
+      "Blockchain digital-inheritance platform MVP. Secure vaults, beneficiary workflows, and Pulse, an onchain liveness oracle deployed at ETHGlobal.",
     role: "Co-founder & Product",
     link: "https://mylegacyledger.com/",
     brand: {
@@ -197,26 +257,75 @@ export const companies: CardItem[] = [
     },
     art: "vault",
     screenshot: "/images/companies/legacy-ledger.webp",
+    screenshots: [
+      "/images/companies/legacy-ledger-1.webp",
+      "/images/companies/legacy-ledger-2.webp",
+      "/images/companies/legacy-ledger-3.webp",
+      "/images/companies/legacy-ledger-4.webp",
+    ],
     domain: "mylegacyledger.com",
   },
 ];
 
-export const previousWork: WorkItem[] = [
+export const previousWorkFullTime: WorkItem[] = [
   {
-    id: "bunny",
-    title: "Growth Manager",
-    company: "Bunny Studio",
-    period: "2019 – 2022",
+    id: "vloom",
+    title: "Co-Founder & CEO",
+    company: "Vloom",
+    period: "Jan 2024 – Present",
     description:
-      "Built Bunny Studio One from zero — the all-in-one creative subscription that later spun off as Bunny Creative. Owned acquisition, retention, and the product-market fit loop across 20+ countries.",
+      "Run all business operations for a 20-person B2B video production and content strategy company, spanning P&L, enterprise sales, and production oversight. Grew revenue to $387K over two years, serving 64 clients with 48% retention. Built internal AI and automation tooling, including a quoting system and a WhatsApp and CRM stack for lead routing and client nurturing.",
+  },
+  {
+    id: "bunny-growth",
+    title: "Growth Lead",
+    company: "Bunny Studio",
+    period: "Apr 2022 – Nov 2023",
+    description:
+      "Pioneered Bunny Studio ONE, a video and content production subscription, growing it from $0 to $600K ARR across 25 institutional clients with a team of 8. Owned the full sales cycle and the ops process that scaled the model, which later grew into Bunny Creative.",
+  },
+  {
+    id: "bunny-pm",
+    title: "Video Content Project Manager",
+    company: "Bunny Studio",
+    period: "Jun 2020 – May 2022",
+    description:
+      "Managed end-to-end video and creative content projects for a global marketplace connecting brands with top-tier video, audio, and written content producers, overseeing production timelines and creative quality.",
   },
   {
     id: "film",
-    title: "Production Coordinator",
-    company: "Independent Film",
-    period: "2016 – 2019",
+    title: "Producer",
+    company: "Día Fragma Fábrica de Películas",
+    period: "Jan 2019 – Dec 2020",
     description:
-      "Coordinated logistics for feature films and commercial shoots across Colombia — crews of 40+, multi-location schedules, and tight delivery windows.",
+      "Produced independent film releases and coordinated regional promotional campaigns across three features: La Bronca, Los Silencios, and Niña Errante.",
+  },
+  {
+    id: "operation-smile",
+    title: "Video Content Strategist",
+    company: "Operation Smile Colombia",
+    period: "Jun 2017 – Dec 2022",
+    description:
+      "Developed brand and video content strategy for the organization, including campaign recap videos and storytelling assets used to communicate program impact.",
+  },
+];
+
+export const previousWorkConsulting: WorkItem[] = [
+  {
+    id: "austral",
+    title: "Growth & AI Automation Systems Consultant",
+    company: "Austral Consultants",
+    period: "Jun 2026 – Aug 2026",
+    description:
+      "Built a WhatsApp sales bot automating lead routing and client nurturing for the advisor team, saving 35+ hours. Built a quote builder that replaced manual pricing lookups, and delivered a 5-hour AI training session to 20 professionals in Australia.",
+  },
+  {
+    id: "travel-diaries",
+    title: "Growth Consultant, Americas Expansion",
+    company: "Travel Diaries",
+    period: "Sep 2025 – Nov 2025",
+    description:
+      "Built a US market expansion system for a Rotterdam-based travel-journaling platform: prospecting, lead scoring, CRM, and automated outreach. Opened a $15,000+ pipeline in three months, closed 1 deal, and left 5 more in negotiation for the team to run independently.",
   },
 ];
 
@@ -227,7 +336,7 @@ export const speaking: SpeakingItem[] = [
     venue: "Professional Development, Australia",
     audience: "Marketing & ops professionals",
     topic:
-      "Practical AI workflows for non-engineers — prompt systems, automation stacks, and shipping without a dev team.",
+      "Practical AI workflows for non-engineers. Prompt systems, automation stacks, and shipping without a dev team.",
     inquiryForm: true,
   },
   {
@@ -236,7 +345,7 @@ export const speaking: SpeakingItem[] = [
     venue: "University of the Andes, Bogotá",
     audience: "Engineering students & faculty",
     topic:
-      "Panelist on building startups from technical foundations — when to code, when to sell, and how to do both.",
+      "Panelist on building startups from technical foundations. When to code, when to sell, and how to do both.",
   },
   {
     id: "biz-beer",
@@ -244,7 +353,7 @@ export const speaking: SpeakingItem[] = [
     venue: "Biz and Beer",
     audience: "Founders & freelancers",
     topic:
-      "How short-form video builds trust faster than any pitch deck — frameworks, gear, and a 30-day content sprint.",
+      "How short-form video builds trust faster than any pitch deck. Frameworks, gear, and a 30-day content sprint.",
   },
 ];
 
