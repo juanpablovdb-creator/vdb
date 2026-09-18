@@ -2,8 +2,16 @@ import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { GigMarquee } from "./components/Marquee";
 import { Card, WorkCard, SpeakingCard } from "./components/Card";
+import { GrowthCase } from "./components/GrowthCase";
 import { ContactSection } from "./components/ContactSection";
-import { projects, companies, previousWorkFullTime, previousWorkConsulting, speaking } from "./data/content";
+import {
+  projects,
+  growthCases,
+  companies,
+  previousWorkFullTime,
+  previousWorkConsulting,
+  speaking,
+} from "./data/content";
 
 export function App() {
   return (
@@ -24,10 +32,28 @@ export function App() {
           </div>
         </section>
 
+        <section id="growth" className="section">
+          <div className="container">
+            <p className="section-label">Growth</p>
+            <h2 className="section-title">Growth</h2>
+            <p className="section-intro">
+              Product, pipeline, and recovery. Three cases where the motion was commercial, not just the tool.
+            </p>
+            <div className="card-grid card-grid--growth">
+              {growthCases.map((item) => (
+                <GrowthCase key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="projects" className="section">
           <div className="container">
             <p className="section-label">Engineering</p>
             <h2 className="section-title">Engineering Projects</h2>
+            <p className="section-intro">
+              Tools I shipped in code. The systems behind outbound, ops, and production.
+            </p>
             <div className="card-grid card-grid--projects">
               {projects.map((item) => (
                 <Card key={item.id} item={item} />

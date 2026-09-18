@@ -61,7 +61,7 @@ body {
   font-family: var(--font-body);
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.48;
   color: var(--text);
   background-color: var(--bg);
   transition:
@@ -76,7 +76,7 @@ h3,
   font-family: var(--font-display);
   font-stretch: 125%;
   font-weight: 800;
-  line-height: 0.95;
+  line-height: 1;
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
@@ -146,9 +146,24 @@ button {
 }
 
 .section-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  margin-bottom: 3rem;
+  font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+  margin-bottom: 0.85rem;
   color: var(--text);
+}
+
+.section-intro {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  max-width: 52ch;
+  margin-bottom: 2.25rem;
+}
+
+.section-title + .card-grid,
+.section-title + .work-group {
+  margin-top: 1.5rem;
 }
 
 .card-grid {
@@ -160,6 +175,14 @@ button {
 
 .card-grid--projects {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card-grid--growth {
+  grid-template-columns: 1fr;
+}
+
+.card-grid--growth > :first-child {
+  grid-column: 1 / -1;
 }
 
 .card-grid--companies {
@@ -195,6 +218,12 @@ button {
 
 .work-group--consulting .card-grid--work {
   margin-top: 2rem;
+}
+
+@media (min-width: 800px) {
+  .card-grid--growth {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 640px) {

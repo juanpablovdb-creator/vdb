@@ -88,11 +88,59 @@ export const hero = {
 
 export const navLinks = [
   { id: "companies", label: "Companies" },
+  { id: "growth", label: "Growth" },
   { id: "projects", label: "Projects" },
   { id: "previous-work", label: "Previous Work" },
   { id: "education", label: "Education" },
   { id: "consultancy", label: "Consultancy" },
   { id: "contact", label: "Contact" },
+];
+
+export interface GrowthCaseItem {
+  id: string;
+  index: string;
+  category: string;
+  metric: string;
+  metricLabel: string;
+  title: string;
+  aside?: string;
+  description: string;
+  featured?: boolean;
+}
+
+export const growthCases: GrowthCaseItem[] = [
+  {
+    id: "bunny-one",
+    index: "01",
+    category: "Product",
+    metric: "$600K",
+    metricLabel: "ARR from zero",
+    title: "Bunny Studio ONE",
+    aside: "Now Bunny Creative",
+    description:
+      "Pioneered the video and content production subscription at Bunny Studio. Took it from $0 to $600K ARR across 25 institutional clients with a team of 8. Owned the full sales cycle and the ops process that scaled the model, which later became Bunny Creative.",
+    featured: true,
+  },
+  {
+    id: "outbound",
+    index: "02",
+    category: "Acquisition",
+    metric: "44",
+    metricLabel: "active clients this year",
+    title: "Outbound campaign",
+    description:
+      "Built and ran Vloom's outbound motion: company discovery, persona targeting, and a sales process the team still runs. That campaign is what Leadflow was later built to operationalize.",
+  },
+  {
+    id: "funnel-email",
+    index: "03",
+    category: "Retention",
+    metric: "Lifecycle",
+    metricLabel: "email recovery",
+    title: "Funnel abandonment",
+    description:
+      "Email sequences for people who started and dropped off. Timed follow-ups to pull them back into the funnel instead of letting the lead go cold.",
+  },
 ];
 
 export const projects: CardItem[] = [
@@ -198,9 +246,9 @@ export const companies: CardItem[] = [
     title: "Vloom",
     tag: "Video Production · Content Strategy",
     description:
-      "B2B video production and content strategy company. 20-person team, 64 clients served, 48% retention, $387K revenue in two years.",
+      "B2B video production and content strategy. Sales-led, $500K in revenue.",
     role: "Co-founder & CEO",
-    link: "https://wearevloom.com/",
+    link: "/vloom",
     brand: {
       bg: "#06060e",
       bgSecondary: "#10101f",

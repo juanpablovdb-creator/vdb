@@ -77,47 +77,47 @@
 .cardTitle {
   font-family: var(--font-display);
   font-stretch: 125%;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.08;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: var(--text);
 }
 
 .card--large .cardTitle {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
 .card--compact .cardTitle {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
 
 .cardRole {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--text-muted-light);
+  color: var(--text-muted);
 }
 
 .cardDescription {
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.55;
-  color: var(--text-muted);
+  color: var(--text);
 }
 
 .card--work .cardTitle {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
 }
 
 .cardMeta {
   font-family: var(--font-body);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;

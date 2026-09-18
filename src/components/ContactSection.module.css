@@ -12,10 +12,10 @@
 .title {
   font-family: var(--font-display);
   font-stretch: 125%;
-  font-size: clamp(2.75rem, 7vw, 5.75rem);
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
   font-weight: 850;
   letter-spacing: -0.02em;
-  line-height: 0.92;
+  line-height: 0.96;
   text-transform: uppercase;
   margin-bottom: 2rem;
   color: var(--inverse-text);
@@ -48,7 +48,7 @@
 
 .emailLink {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-size: clamp(1.45rem, 3.6vw, 2.15rem);
   font-weight: 600;
   letter-spacing: -0.02em;
   text-transform: lowercase;
@@ -76,7 +76,7 @@
 
 .calendarLink {
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 300;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -121,7 +121,7 @@
 
 .socialLink {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: 0.06em;
   text-transform: uppercase;
