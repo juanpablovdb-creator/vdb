@@ -43,6 +43,16 @@ export function CaseStudyTemplate({ study }: CaseStudyTemplateProps) {
           <Block key={`${block.type}-${index}`} block={block} />
         ))}
 
+        {study.related && study.related.length > 0 && (
+          <div className={styles.related}>
+            {study.related.map((item) => (
+              <a key={item.href} href={item.href} className={styles.relatedLink}>
+                {item.label} →
+              </a>
+            ))}
+          </div>
+        )}
+
         <a href={homeHref} className={`${styles.back} ${styles.backFooter}`}>
           ← {homeLabel}
         </a>
@@ -84,7 +94,7 @@ function Block({ block }: { block: CaseStudyBlock }) {
           data-columns={columns}
         >
           {block.images.map((image) => (
-            <Figure key={image.src} figure={image} />
+            <Figure key={image.src ?? image.caption ?? image.alt} figure={image} />
           ))}
         </div>
       </section>
@@ -97,13 +107,15 @@ function Block({ block }: { block: CaseStudyBlock }) {
         <p className={styles.label}>{block.label}</p>
         {block.intro && <p className={styles.copy}>{block.intro}</p>}
         <div className={styles.cards}>
-          {block.items.map((item) => (
+          {block.items.map((item) => {
+            const isExternal = /^https?:\/\//.test(item.href);
+            return (
             <a
               key={item.href}
               className={styles.card}
               href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
             >
               <img src={item.image} alt={item.alt} />
               <div className={styles.cardBody}>
@@ -112,7 +124,8 @@ function Block({ block }: { block: CaseStudyBlock }) {
                 <p className={styles.cardLink}>Read the case study →</p>
               </div>
             </a>
-          ))}
+            );
+          })}
         </div>
       </section>
     );
@@ -134,12 +147,14 @@ function Block({ block }: { block: CaseStudyBlock }) {
     );
   }
 
+  const isExternal = block.external ?? /^https?:\/\//.test(block.href);
+
   return (
     <a
       className={styles.external}
       href={block.href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
     >
       {block.label} →
     </a>
@@ -154,18 +169,26 @@ function Figure({
   featured?: boolean;
 }) {
   const fit = figure.fit ?? "cover";
-  const img = (
+  const media = figure.src ? (
     <img src={figure.src} alt={figure.alt} data-fit={fit} />
+  ) : (
+    <div className={styles.placeholder} role="img" aria-label={figure.alt} />
   );
+
+  const isExternal = figure.href ? /^https?:\/\//.test(figure.href) : false;
 
   return (
     <figure className={`${styles.figure} ${featured ? styles.featured : ""}`}>
       {figure.href ? (
-        <a href={figure.href} target="_blank" rel="noopener noreferrer">
-          {img}
+        <a
+          href={figure.href}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+        >
+          {media}
         </a>
       ) : (
-        img
+        media
       )}
       {figure.caption && <figcaption>{figure.caption}</figcaption>}
     </figure>

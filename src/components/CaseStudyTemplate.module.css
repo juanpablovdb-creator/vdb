@@ -189,6 +189,40 @@
   height: auto;
 }
 
+.placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border);
+  background: linear-gradient(160deg, var(--surface-hover), var(--surface));
+}
+
+.related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.relatedLink {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.15rem;
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.relatedLink:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 .figure figcaption {
   margin-top: 0.5rem;
   font-family: var(--font-body);

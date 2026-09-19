@@ -1,5 +1,5 @@
 export interface CaseStudyFigure {
-  src: string;
+  src?: string;
   alt: string;
   caption?: string;
   href?: string;
@@ -20,7 +20,12 @@ export type CaseStudyBlock =
   | { type: "gallery"; label?: string; intro?: string; columns?: 1 | 2 | 3; images: CaseStudyFigure[] }
   | { type: "cards"; label: string; intro?: string; items: CaseStudyCard[] }
   | { type: "logos"; label?: string; intro?: string; images: CaseStudyFigure[] }
-  | { type: "link"; href: string; label: string };
+  | { type: "link"; href: string; label: string; external?: boolean };
+
+export interface CaseStudyRelated {
+  href: string;
+  label: string;
+}
 
 export interface CaseStudy {
   path: string;
@@ -30,6 +35,7 @@ export interface CaseStudy {
   documentTitle: string;
   homeHref?: string;
   homeLabel?: string;
+  related?: CaseStudyRelated[];
   hero?: CaseStudyFigure;
   blocks: CaseStudyBlock[];
 }
@@ -292,6 +298,207 @@ export const vloomCaseStudy: CaseStudy = {
   ],
 };
 
+const nautaImg = (file: string) => `/images/projects/${file}`;
+
+export const nautaCaseStudy: CaseStudy = {
+  path: "/nauta",
+  title: "Nauta",
+  role: "Founder · Airbnb tech operations",
+  period: "since February 2025",
+  documentTitle: "Nauta | VDB",
+  homeHref: "/",
+  homeLabel: "Back to home",
+  related: [{ href: "/nauta-analytics", label: "See also: Nauta Analytics" }],
+  hero: {
+    src: nautaImg("nauta-1.webp"),
+    alt: "Nauta Hub portfolio dashboard with revenue, occupancy, and margin KPIs",
+    caption: "Nauta Hub, the operating view for the portfolio",
+    href: "/nauta-analytics",
+    fit: "natural",
+  },
+  blocks: [
+    {
+      type: "copy",
+      label: "Context",
+      paragraphs: [
+        "Most property managers in this market sell a package: a fee, a listing, a WhatsApp group, and a monthly report assembled by hand. The owner finds out how the unit did after the month is already closed.",
+        "Nauta started in February 2025 to run the full Airbnb operation, with a different bet. The product is not only hospitality. It is knowing, in the week, which units are actually making money.",
+        "That only works if the books are live. A spreadsheet rebuilt every Monday does not scale past a handful of apartments, and it is where the errors hide. The company needed an operations layer and an analytics layer, built as one system.",
+      ],
+    },
+    {
+      type: "copy",
+      label: "What was built",
+      paragraphs: [
+        "An Airbnb operations company that charges on the real profit of each property, not a flat monthly fee. If a unit does not perform, the fee does not either. The incentive sits with the owner, not with occupancy for its own sake.",
+        "The day to day is guest ops, cleaning, maintenance, and owner reporting across 20 active units. Channel mix matters (Airbnb versus other inventory), and so does occupancy by source. Those numbers used to live in files. They now live in Nauta Hub.",
+        "The Hub is the analytics layer: portfolio KPIs, revenue versus spend, occupancy, and owner payouts, with access scoped so an owner only sees their apartments. How that tool was built is its own case study. This page is the company that runs on it.",
+      ],
+    },
+    {
+      type: "figure",
+      figure: {
+        src: nautaImg("nauta-2.webp"),
+        alt: "Monthly revenue and owner payouts by apartment, plus channel mix",
+        caption: "Revenue, owner payouts, and sales mix by channel",
+        href: "/nauta-analytics",
+        fit: "natural",
+      },
+    },
+    {
+      type: "gallery",
+      label: "The operating views",
+      intro:
+        "Same system the team uses in the week. Occupancy by source on one side, owner access scoped per apartment on the other.",
+      columns: 2,
+      images: [
+        {
+          src: nautaImg("nauta-3.webp"),
+          alt: "Occupancy rate, occupied days, Airbnb occupancy, and off-platform occupancy",
+          caption: "Occupancy, Airbnb versus other inventory",
+          href: "/nauta-analytics",
+          fit: "natural",
+        },
+        {
+          src: nautaImg("nauta-4.webp"),
+          alt: "Nauta Hub admin panel for creating users and assigning apartments",
+          caption: "Owners see only the units assigned to them",
+          href: "/nauta-analytics",
+          fit: "natural",
+        },
+      ],
+    },
+    {
+      type: "copy",
+      label: "Role",
+      paragraphs: [
+        "Founder. I own the analytics, the data, the engineering, and the finances. The operating company and the tool are the same bet: if the numbers are late or wrong, the commercial model does not work.",
+      ],
+    },
+    {
+      type: "copy",
+      label: "Team and operations",
+      paragraphs: [
+        "Nauta runs with 3 people on 20 active properties. The team stayed small on purpose. The Hub is what makes that possible: nobody spends Monday rebuilding the book, and an owner can log in without seeing another owner's P&L.",
+      ],
+    },
+    {
+      type: "copy",
+      label: "Results",
+      paragraphs: [
+        "Live since February 2025, with managed volume growing from the first month. Occupancy, channel mix, and owner payouts sit in one place, so the operating conversation is about the unit, not about who last touched the file.",
+        "The weekly spreadsheet run is gone. That time went back into the properties.",
+      ],
+    },
+    {
+      type: "link",
+      href: "/nauta-analytics",
+      label: "Read how Nauta Analytics was built",
+      external: false,
+    },
+  ],
+};
+
+export const nautaAnalyticsCaseStudy: CaseStudy = {
+  path: "/nauta-analytics",
+  title: "Nauta Analytics",
+  role: "Dashboard and data pipeline",
+  period: "built in Lovable",
+  documentTitle: "Nauta Analytics | VDB",
+  homeHref: "/",
+  homeLabel: "Back to home",
+  related: [{ href: "/nauta", label: "See also: Nauta" }],
+  hero: {
+    src: nautaImg("nauta-1.webp"),
+    alt: "Nauta Hub overview with filters by building, apartment, month, and year",
+    caption: "Nauta Hub, portfolio view",
+    fit: "natural",
+  },
+  blocks: [
+    {
+      type: "copy",
+      label: "Context",
+      paragraphs: [
+        "Nauta was already operating 20 properties. The books lived in Google Sheets. Every week the same run: pull bookings and refunds, add cleaning and maintenance, calculate occupancy, split profit with each owner, then check the model still matched the bank.",
+        "Slow, easy to break, and it ate about 20 hours a week. Past a handful of apartments, the file became the operation. If the sheet was late, the company was flying blind until someone finished the run.",
+      ],
+    },
+    {
+      type: "copy",
+      label: "What was built",
+      paragraphs: [
+        "A dashboard and data pipeline that centralizes every unit: revenue, costs, occupancy, and profitability, fed from a financial model in Google Sheets that I designed. The sheet already held the logic for revenue, COGS, OPEX, and owner splits by apartment and by month. The Hub reads that model. It does not reinvent it.",
+        "Filters cut the portfolio by building, apartment, month, and year. The overview is the Monday meeting: gross revenue, refunds, net revenue, total expenses, average occupancy, owner net, and net margin, plus revenue versus spend and occupancy over time.",
+        "Under that sit the operating views: monthly revenue and owner payouts per apartment, channel mix, occupancy by source (Airbnb versus other inventory), and an admin layer that creates users and assigns apartments so an owner never sees another owner's P&L.",
+      ],
+    },
+    {
+      type: "gallery",
+      label: "The operating flow",
+      intro:
+        "Portfolio KPIs first, then the cuts the team actually uses: payouts, occupancy by source, and scoped owner access.",
+      columns: 1,
+      images: [
+        {
+          src: nautaImg("nauta-1.webp"),
+          alt: "Nauta Hub KPI cards for revenue, expenses, occupancy, owner net, and margin",
+          caption: "Overview: revenue, spend, occupancy, owner net, margin",
+          fit: "contain",
+        },
+        {
+          src: nautaImg("nauta-2.webp"),
+          alt: "Line charts of monthly revenue and owner payouts per apartment, with a channel mix pie",
+          caption: "Per apartment: monthly revenue, owner payouts, sales mix",
+          fit: "contain",
+        },
+        {
+          src: nautaImg("nauta-3.webp"),
+          alt: "Occupancy charts for average rate, occupied days, Airbnb, and off-platform",
+          caption: "Occupancy: rate, occupied days, Airbnb versus off-platform",
+          fit: "contain",
+        },
+        {
+          src: nautaImg("nauta-4.webp"),
+          alt: "Admin panel to create users and assign specific apartments",
+          caption: "Admin: users and apartment-level access",
+          fit: "contain",
+        },
+      ],
+    },
+    {
+      type: "copy",
+      label: "Role",
+      paragraphs: [
+        "Built entirely on my own, with no external engineering team, using Lovable as the main development tool. The Sheets model was already mine. The Hub is the layer that made it operational.",
+      ],
+    },
+    {
+      type: "copy",
+      label: "Technical decision",
+      paragraphs: [
+        "Building the screens in Lovable was the fast part. Trusting them was not. For the first stretch, every total on the dashboard had to match the spreadsheet, apartment by apartment, month by month. Revenue, refunds, COGS, OPEX, owner split. If a number drifted, the pipeline was wrong, not the model.",
+        "That validation loop is what made it safe to stop opening the sheet every Monday. Until the two sources agreed, the dashboard was a prototype. After they agreed, it became the book.",
+      ],
+    },
+    {
+      type: "copy",
+      label: "Results",
+      paragraphs: [
+        "It replaced the manual process completely. What used to mean running and updating spreadsheets constantly is now a live view, saving about 20 hours a week.",
+        "The Sheets model is still the source of truth. The difference is that nobody has to re-run it to know how the week looks.",
+      ],
+    },
+    {
+      type: "link",
+      href: "/nauta",
+      label: "Read the Nauta company case study",
+      external: false,
+    },
+  ],
+};
+
 export const caseStudiesByPath: Record<string, CaseStudy> = {
   [vloomCaseStudy.path]: vloomCaseStudy,
+  [nautaCaseStudy.path]: nautaCaseStudy,
+  [nautaAnalyticsCaseStudy.path]: nautaAnalyticsCaseStudy,
 };

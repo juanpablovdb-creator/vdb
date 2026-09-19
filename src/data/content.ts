@@ -170,11 +170,11 @@ export const projects: CardItem[] = [
   },
   {
     id: "nauta-engineering",
-    title: "Nauta",
-    tag: "Python · Data · Airbnb Analytics",
+    title: "Nauta Analytics",
+    tag: "Dashboard · Lovable · Data pipeline",
     description:
-      "Built the analytics backbone: listing data ingestion, revenue dashboards, and occupancy forecasting for property managers.",
-    link: "#",
+      "Dashboard and data pipeline for Nauta's 20 properties. Replaced weekly spreadsheet work and saves about 20 hours a week.",
+    link: "/nauta-analytics",
     brand: {
       bg: "#0c2430",
       bgSecondary: "#164a5e",
@@ -270,9 +270,9 @@ export const companies: CardItem[] = [
     title: "Nauta",
     tag: "Airbnb Operations",
     description:
-      "Tech operations for Airbnb hosts. Portfolio management, pricing strategy, and guest experience at scale.",
-    role: "Co-founder & Head of Operations",
-    link: "#",
+      "Airbnb property operations that charge on real profit, not a flat fee. 20 active units, 3 people, since February 2025.",
+    role: "Founder",
+    link: "/nauta",
     brand: {
       bg: "#1a1610",
       bgSecondary: "#2e2618",

@@ -26,7 +26,7 @@ export function Card({ item, size = "default" }: CardProps) {
 
   return (
     <article className={`${styles.card} ${sizeClass}`}>
-      {item.link && (
+      {item.link && item.link !== "#" && (
         <a
           className={styles.cardLink}
           href={item.link}
